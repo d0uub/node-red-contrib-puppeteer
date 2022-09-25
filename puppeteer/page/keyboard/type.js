@@ -5,12 +5,14 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
+				
         let text = config.text
         text = config.texttype=="msg"?msg[config.text]:text
         text = config.texttype=="flow"?flowContext.get(config.text):text
         text = config.texttype=="global"?globalContext.get(config.text):text
         this.status({fill:"green",shape:"dot",text:`Typing ${text}`});
-        await msg.puppeteer.page.keyboard.type(text)
+        await puppeteerCtx.page.keyboard.type(text)
         this.status({fill:"grey",shape:"ring",text:`Typed ${text}`});
         this.send(msg)
       } catch (e) {

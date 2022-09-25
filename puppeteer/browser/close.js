@@ -10,10 +10,12 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
         this.status({fill:"green",shape:"dot",text:`Closing browser...`});
-        await msg.puppeteer.browser.close()
+        await puppeteerCtx.browser.close()
         this.status({fill:"grey",shape:"ring",text:`Browser closed`});
-        delete msg.puppeteer
+        //delete msg.puppeteer
+				this.context().flow.set("puppeteer", undefined);
         node.send(msg)
       } catch (e) {
         this.status({fill:"red",shape:"ring",text:e});

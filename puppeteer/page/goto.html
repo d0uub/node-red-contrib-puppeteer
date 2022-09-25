@@ -4,15 +4,14 @@
       color: '#ffd166',
       defaults: {
         name: { value: '' },
-        url:  { value:'', required: true},
-        urltype: {value:'str'},
+        url:  { value:''},
         waitUntil: {value:'networkidle2'}
       },
       inputs:1,
       outputs:1,
       icon: "url.svg",
       label: function() {
-          let label = this.name==""?this.urltype != "str"?this.urltype+"."+this.url:this.url:this.name
+          let label = this.name==""?this.url:this.name
           return label || "URL"
       },
       paletteLabel: "URL",
@@ -35,7 +34,6 @@
   <div class="form-row">
     <label for="node-input-url"><i class="fa fa-link"></i> URL</label>
     <input id="node-input-url"></input>
-    <input type="hidden" id="node-input-urltype"></input>
   </div>
   <div class="form-row">
     <label for="node-input-waitUntil"><i class="fa fa-spinner"></i> Wait Until</label>

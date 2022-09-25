@@ -6,11 +6,12 @@ module.exports = function (RED) {
     config.clickCount = parseInt(config.clickCount)
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
         let selector = config.selectortype!="str"?eval(config.selectortype+"."+config.selector):config.selector
         this.status({fill:"green",shape:"dot",text:`Wait for ${selector}`});
-        await msg.puppeteer.page.waitForSelector(selector)
+        await puppeteerCtx.page.waitForSelector(selector)
         this.status({fill:"green",shape:"dot",text:`Click ${selector}`});
-        await msg.puppeteer.page.click(selector,config)
+        await puppeteerCtx.page.click(selector,config)
         this.status({fill:"grey",shape:"ring",text:`Clicked ${selector}`});
         this.send(msg) 
       } catch(e) {

@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('puppeteer-page-set-cookie', {
+      category: 'Puppeteer',
+      color: '#118ab2',
+      defaults: {
+        name: { value: '' },
+        cookie: { value:''}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "screenshot.svg",
+      label: function() {
+          let label = this.name==""?this.cookie:this.name
+          return label || "Set Cookie"
+      },
+      paletteLabel: "SetCookie"
+    });
+</script>
+
+<script type="text/x-red" data-template-name="puppeteer-page-set-cookie">
+
+  <div class="form-row">
+      <label for="node-input-cookie"><i class="fa fa-tag"></i> Cookie</label>
+      <input type="text" id="node-input-cookie" style="width:70%;" placeholder="Cookie" />
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="puppeteer-page-set-cookie">
+    <p>Set Cookie</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>Cookie<span class="property-type">text</span></dt>
+        <dd>msg.cookie</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload<span class="property-type">Buffer</span></dt>
+        <dd>buffer with captured setuseragent.</dd>
+    </dl>
+    <h3>Details</h3>
+        <p>Set Page Cookie</p>
+</script>

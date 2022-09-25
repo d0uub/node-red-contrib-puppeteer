@@ -6,9 +6,10 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
         this.status({fill:"green",shape:"dot",text:`Opening new Tab...`});
-        msg.puppeteer.page = await msg.puppeteer.browser.newPage()
-        msg.puppeteer.page.setDefaultTimeout(config.timeout)
+        puppeteerCtx.page = await msg.puppeteer.browser.newPage()
+        puppeteerCtx.page.setDefaultTimeout(config.timeout)
         this.status({fill:"grey",shape:"ring",text:`New Tab created`});
         node.send(msg) 
       } catch (e) {

@@ -5,8 +5,10 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
+				
         this.status({fill:"green",shape:"dot",text:`Pressing Key ${config.key}`});
-        await msg.puppeteer.page.keyboard.press(config.key)
+        await puppeteerCtx.page.keyboard.press(config.key)
         this.status({fill:"grey",shape:"ring",text:`Pressed Key ${config.key}`});
         this.send(msg)
       } catch (e) {
