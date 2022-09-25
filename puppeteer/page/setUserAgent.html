@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('puppeteer-page-setuseragent', {
+      category: 'Puppeteer',
+      color: '#118ab2',
+      defaults: {
+        name: { value: '' },
+        useragent: { value:'', required: true}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "screenshot.svg",
+      label: function() {
+          let label = this.name==""?this.useragent:this.name
+          return label || "User Agent"
+      },
+      paletteLabel: "SetUserAgent"
+    });
+</script>
+
+<script type="text/x-red" data-template-name="puppeteer-page-setuseragent">
+
+  <div class="form-row">
+      <label for="node-input-useragent"><i class="fa fa-tag"></i> User Agent</label>
+      <input type="text" id="node-input-useragent" style="width:70%;" placeholder="User Agent" />
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="puppeteer-page-setuseragent">
+    <p>Set User Agent</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>User Agent<span class="property-type">text</span></dt>
+        <dd>When true, takes a setuseragent of the full scrollable page. Defaults to <code>false</code>.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload<span class="property-type">Buffer</span></dt>
+        <dd>buffer with captured setuseragent.</dd>
+    </dl>
+    <h3>Details</h3>
+        <p>Browser screenshot, require focus / active to browser</p>
+</script>

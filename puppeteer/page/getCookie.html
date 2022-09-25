@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('puppeteer-page-get-cookie', {
+      category: 'Puppeteer',
+      color: '#118ab2',
+      defaults: {
+        name: { value: '' }
+      },
+      inputs:1,
+      outputs:1,
+      icon: "screenshot.svg",
+      label: function() {
+          return this.name || "Get Cookie"
+      },
+      paletteLabel: "Get Cookie"
+    });
+</script>
+
+<script type="text/x-red" data-template-name="puppeteer-page-get-cookie">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="puppeteer-page-get-cookie">
+    <p>Get Cookie</p>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload<span class="property-type">Buffer</span></dt>
+        <dd>buffer with captured cookie.</dd>
+    </dl>
+    <h3>Details</h3>
+        <p>Get Page Cookie</p>
+</script>

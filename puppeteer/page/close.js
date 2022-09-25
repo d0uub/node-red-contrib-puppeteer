@@ -5,10 +5,12 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
         this.status({fill:"green",shape:"dot",text:`Closing Tab...`});
         await msg.puppeteer.page.close()
-        msg.puppeteer.page = (await msg.puppeteer.browser.pages())[0]
+        puppeteerCtx.page = (await puppeteerCtx.browser.pages())[0]
         this.status({fill:"grey",shape:"ring",text:`Tab closed`});
+				this.context().flow.set("puppeteer", puppeteerCtx);
         this.send(msg)
       } catch (e) {
         this.status({fill:"red",shape:"ring",text:e});

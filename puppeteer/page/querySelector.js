@@ -7,12 +7,14 @@ module.exports = function (RED) {
     
     // Retrieve the config node
     this.on('input', function (msg) {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
+				
       node.selector = config.selectortype=="msg"?msg[node.selector]:node.selector
       node.selector = config.selectortype=="flow"?flowContext.get(node.selector):node.selector
       node.selector = config.selectortype=="global"?globalContext.get(node.selector):node.selector
       const selector = 'a'
       const property = 'innerText'
-      msg.puppeteer.page.evaluate(({selector, property}) => {
+      puppeteerCtx.page.evaluate(({selector, property}) => {
         return document.querySelector(selector)[property]
       },{ 
         selector: this.selector, 

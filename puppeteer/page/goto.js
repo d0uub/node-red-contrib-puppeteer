@@ -5,9 +5,16 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
-        let url = config.urltype!="str"?eval(config.urltype+"."+config.url):config.url
-        this.status({fill:"green",shape:"dot",text:`Go to ${url}`});
-        await msg.puppeteer.page.goto(url,config)
+				let puppeteerCtx = this.context().flow.get("puppeteer");
+				
+        let url = config.url;
+				
+				if(!url && msg.url !== undefined){
+					url = msg.url;
+				}
+        
+				this.status({fill:"green",shape:"dot",text:`Go to ${url}`});
+        await puppeteerCtx.page.goto(url,config)
         this.status({fill:"grey",shape:"ring",text:url});
         this.send(msg)
       } catch (e) {

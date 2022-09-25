@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    RED.nodes.registerType('puppeteer-page-set-viewport', {
+      category: 'Puppeteer',
+      color: '#118ab2',
+      defaults: {
+        name: { value: '' },
+        viewport_w: { value: 1920 },
+        viewport_h: { value: 1080 }
+      },
+      inputs:1,
+      outputs:1,
+      icon: "screenshot.svg",
+      label: function() {
+          let label = this.name==""?(this.viewport_w + "x" + this.viewport_h):this.name
+          return label || "View Port"
+      },
+      paletteLabel: "SetViewPort"
+    });
+</script>
+
+<script type="text/x-red" data-template-name="puppeteer-page-set-viewport">
+
+  <div class="form-row">
+      <label for="node-input-viewport_w"><i class="fa fa-tag"></i> Width</label>
+      <input type="number" id="node-input-viewport_w" style="width:70%;" placeholder="1920" />
+  </div>
+  <div class="form-row">
+      <label for="node-input-viewport_h"><i class="fa fa-tag"></i> Height</label>
+      <input type="number" id="node-input-viewport_h" style="width:70%;" placeholder="1080" />
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="puppeteer-page-viewport">
+    <p>Set ViewPort</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>W<span class="property-type">text</span></dt>
+        <dd>.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>H<span class="property-type">text</span></dt>
+        <dd>.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload<span class="property-type">Buffer</span></dt>
+        <dd>buffer with captured viewport.</dd>
+    </dl>
+    <h3>Details</h3>
+        <p>Browser screenshot, require focus / active to browser</p>
+</script>

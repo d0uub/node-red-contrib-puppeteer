@@ -3,15 +3,15 @@
       category: 'Puppeteer',
       color: '#ffd166',
       defaults: {
-        timeout: {value: 30000 },
+        timeout: {value: 30000},
         slowMo: { value: false },
         headless: { value: true, require: true },
         stealth: { value: false },
 				ignorehttpserrors: { value: false },
         debugip: { value:"127.0.0.1" },
         debugport: { value: 3000 },
-        devtools: {value: false },
-        name: { value: '' },
+        devtools: {value: false},
+        name: { value: ''},
       },
       inputs:1,
       outputs:1,
@@ -80,7 +80,7 @@
         <dd>.</dd>
         <dt>Debug IP<span class="property-type">text</span></dt>
         <dd>Specify custom debugging ip. It will connect to existing Chrome if ip specified. Pass <code>0</code> to discover a random port. Defaults to <code>0</code>.</dd>
-				<dt>Debug Port<span class="property-type">number</span></dt>
+        <dt>Debug Port<span class="property-type">number</span></dt>
         <dd>Specify custom debugging port. It will connect to existing Chrome if port specified. Pass <code>0</code> to discover a random port. Defaults to <code>0</code>.</dd>
         <dt>Show Devtools<span class="property-type">boolean</span></dt>
         <dd>Whether to auto-open a DevTools panel for each tab. If this option is <code>true</code>, the <code>Hide Chrome</code> option will be set <code>false</code>.</dd>

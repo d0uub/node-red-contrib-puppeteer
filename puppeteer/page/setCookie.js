@@ -1,5 +1,5 @@
 module.exports = function (RED) {
-  function PuppeteerPageScreenshot (config) {
+  function PuppeteerPageSetCookie (config) {
     RED.nodes.createNode(this, config)
 
     // Retrieve the config node
@@ -7,10 +7,15 @@ module.exports = function (RED) {
       try {
 				let puppeteerCtx = this.context().flow.get("puppeteer");
 				
-        this.status({fill:"green",shape:"dot",text:`Capturing screen ...`});
-        msg.payload = await puppeteerCtx.page.screenshot({fullPage:config.fullpage})
-        this.status({fill:"grey",shape:"ring",text:`Screen captured`});
-        RED.comms.publish("puppeteer-screenshot", { id:this.id, image:msg.payload.toString("base64") });
+        let cookie = config.cookie;
+
+				if(!cookie && msg.cookie !== undefined){
+					cookie = msg.cookie;
+				}
+
+        this.status({fill:"green",shape:"dot",text:`Setting Cookie to ${cookie}`});
+        await puppeteerCtx.page.setCookie(...cookie)
+        this.status({fill:"grey",shape:"ring",text:`Cookie set`});
         this.send(msg)
       } catch (e) {
         this.status({fill:"red",shape:"ring",text:e});
@@ -22,7 +27,8 @@ module.exports = function (RED) {
       });
     oneditprepare: function oneditprepare() {
       $("#node-input-name").val(this.name)
+      $("#node-input-cookie").val(config.cookie)
     }
   }
-  RED.nodes.registerType('puppeteer-page-screenshot', PuppeteerPageScreenshot)
+  RED.nodes.registerType('puppeteer-page-set-cookie', PuppeteerPageSetCookie)
 }

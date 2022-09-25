@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    RED.nodes.registerType('puppeteer-page-goto', {
+      category: 'Puppeteer',
+      color: '#ffd166',
+      defaults: {
+        name: { value: '' },
+        url:  { value:'', required: true},
+        urltype: {value:'str'},
+        waitUntil: {value:'networkidle2'}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "url.svg",
+      label: function() {
+          let label = this.name==""?this.urltype != "str"?this.urltype+"."+this.url:this.url:this.name
+          return label || "URL"
+      },
+      paletteLabel: "URL",
+      oneditprepare: function() {
+        $("#node-input-url").typedInput({
+          default:'str',
+          types:["str","msg","flow","global"],
+          typeField: "#node-input-urltype"
+        })
+      },
+
+    });
+</script>
+
+<script type="text/x-red" data-template-name="puppeteer-page-goto">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-url"><i class="fa fa-link"></i> URL</label>
+    <input id="node-input-url"></input>
+    <input type="hidden" id="node-input-urltype"></input>
+  </div>
+  <div class="form-row">
+    <label for="node-input-waitUntil"><i class="fa fa-spinner"></i> Wait Until</label>
+    <select id="node-input-waitUntil" name="button">
+      <option value="load">load</option>
+      <option value="domcontentloaded">domcontentloaded</option>
+      <option value="networkidle0">networkidle0</option>
+      <option value="networkidle2">networkidle2</option>
+    </select>
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="puppeteer-page-goto">
+    <p>Chrome page navigation</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>URL<span class="property-type">string</span></dt>
+        <dd>URL to navigate page to. The URL should include scheme, e.g. https://</dd>
+        <dt>Wait Until<span class="property-type">string</span></dt>
+        <dd>When to consider navigation succeeded. Given an array of event strings, navigation is considered to be successful after all events have been fired. Events can be either:</dd>
+        <dd>- <code>load</code> : consider navigation to be finished when the load event is fired.</dd>
+        <dd>- <code>domcontentloaded</code> : consider navigation to be finished when the DOMContentLoaded event is fired.</dd>
+        <dd>- <code>networkidle0</code> : consider navigation to be finished when there are no more than 0 network connections for at least 500 ms.</dd>
+        <dd>- <code>networkidle2</code> : consider navigation to be finished when there are no more than 2 network connections for at least 500 ms.</dd>
+    </dl>
+</script>

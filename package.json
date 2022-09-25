@@ -37,7 +37,12 @@
       "puppeteer-page-close": "puppeteer/page/close.js",
       "puppeteer-page-keyboard-type": "puppeteer/page/keyboard/type.js",
       "puppeteer-page-keyboard-press": "puppeteer/page/keyboard/press.js",
+      "puppeteer-page-get-cookie": "puppeteer/page/getCookie.js",
+      "puppeteer-page-get-title": "puppeteer/page/getTitle.js",
       "puppeteer-page-get-value": "puppeteer/page/get.js",
+      "puppeteer-page-setuseragent": "puppeteer/page/setUserAgent.js",
+      "puppeteer-page-set-cookie": "puppeteer/page/setCookie.js",
+      "puppeteer-page-set-viewport": "puppeteer/page/setViewPort.js",
       "puppeteer-page-set-value": "puppeteer/page/set.js",
       "puppeteer-page-upload": "puppeteer/page/upload.js"
     }

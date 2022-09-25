@@ -5,12 +5,14 @@ module.exports = function (RED) {
     // Retrieve the config node
     this.on('input', async function (msg) {
       try {
+				let puppeteerCtx = this.context().flow.get("puppeteer");
+				
         let selector = config.selectortype!="str"?eval(config.selectortype+"."+config.selector):config.selector
         let property = config.propertytype!="str"?eval(config.propertytype+"."+config.property):config.property
         this.status({fill:"green",shape:"dot",text:`Wait for ${selector}`});
-        await msg.puppeteer.page.waitForSelector(selector)
+        await puppeteerCtx.page.waitForSelector(selector)
         this.status({fill:"green",shape:"dot",text:`Getting ${selector}`});
-        const value =  await msg.puppeteer.page.$eval(selector, (el,property) => el[property], property);
+        const value =  await puppeteerCtx.page.$eval(selector, (el,property) => el[property], property);
         this.status({fill:"grey",shape:"ring",text:`${value}`});
         msg.payload = value
         this.send(msg) 
